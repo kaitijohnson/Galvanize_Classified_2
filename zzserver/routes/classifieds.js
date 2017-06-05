@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex')
 
-router.get('/classifieds', (req, res, next) => {
+router.get('/', (req, res, next) => {
   knex('classifieds')
   .select('id', 'title', 'title', 'description', 'price', 'item_image')
   .orderBy('id')
@@ -17,7 +17,7 @@ router.get('/classifieds', (req, res, next) => {
   });
 });
 
-router.get('/classifieds/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   let id = Number.parseInt(req.params.id)
 
   knex('classifieds')
@@ -31,7 +31,7 @@ router.get('/classifieds/:id', (req, res, next) => {
     })
 })
 
-router.post('/classifieds', (req, res, next) => {
+router.post('/', (req, res, next) => {
   knex('classifieds')
   .returning(['id', 'title', 'description', 'price', 'item_image'])
   .insert({
@@ -48,7 +48,7 @@ router.post('/classifieds', (req, res, next) => {
   });
 });
 
-router.patch('/classifieds/:id', (req, res, next) => {
+router.patch('/:id', (req, res, next) => {
   let id = Number.parseInt(req.params.id)
 
   knex('classifieds')
@@ -64,7 +64,7 @@ router.patch('/classifieds/:id', (req, res, next) => {
     });
 });
 
-router.delete('/classifieds/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   let id = Number.parseInt(req.params.id)
 
   knex('classifieds')
