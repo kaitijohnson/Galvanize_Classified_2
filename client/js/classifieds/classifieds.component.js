@@ -14,7 +14,7 @@
     const vm = this
 
     vm.$onInit = onInit
-    vm.togglePostForm = togglePostForm
+    // vm.togglePostForm = togglePostForm
     vm.toggleEdit = toggleEdit
     vm.getAds = getAds
     vm.getClass = getAds
@@ -42,21 +42,24 @@
     }
 
     function postClass() {
-      classService.addClass(vm.post)
+      console.log('getting here')
+      classService.postClass(vm.post)
       .then(post => {
         })
       // vm.posts.push(vm.post)
-      vm.togglePostForm()
+      // vm.togglePostForm()
       delete vm.post
       $state.reload()
     }
 
     function updateClass(post) {
-      classService.updateClass(post.id, vm.editP)
-      .then(item => {
+      console.log('updating the thing in das components', vm.editClass)
+      classService.updateClass(post.id, vm.editClass)
+      .then(post => {
         // delete vm.item
         // onInit()
         })
+      delete vm.post
       $state.reload()
     }
 

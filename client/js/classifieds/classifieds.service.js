@@ -18,16 +18,18 @@
     }
 
     function postClass(post) {
+      console.log(post)
       return $http.post('/api/classifieds', post)
       .then((classifieds) => {
         return classifieds.data
       })
     }
 
-    function updateClass(id, classifieds) {
-      return $http.patch(`/api/classifieds/${id}`, classifieds)
-      .then((classifieds) => {
-        return classifieds.data
+    function updateClass(id, post) {
+      console.log('i love to update in teh services', post)
+      return $http.patch(`/api/classifieds/${id}`, post)
+      .then((post) => {
+        return post.data
       })
     }
 
