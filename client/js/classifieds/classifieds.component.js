@@ -2,9 +2,10 @@
 (function() {
   'use strict'
 
-  angular.module('app').component('classifieds', {
+  angular.module('app')
+  .component('classifieds', {
     controller: controller,
-    template: './js/classifieds/classifieds.html'
+    templateUrl: './js/classifieds/classifieds.html'
   })
 
   controller.$inject = ['classService', '$state']
@@ -13,9 +14,10 @@
     const vm = this
 
     vm.$onInit = onInit
-    vm.getAds = getAds
     vm.togglePostForm = togglePostForm
-    vm.getClass = getClass
+    vm.toggleEdit = toggleEdit
+    vm.getAds = getAds
+    vm.getClass = getAds
     vm.postClass = postClass
     vm.updateClass = updateClass
     vm.deleteClass = deleteClass
@@ -35,11 +37,34 @@
       vm.newPost = !vm.newPost
     }
 
-    function addPost() {
-      vm.post.publishedAt = Date.now()
-      vm.posts.push(vm.post)
+    function toggleEdit() {
+    vm.showClass = vm.showClass ? !vm.showClass : true
+    }
+
+    function postClass() {
+      classService.addClass(vm.post)
+      .then(post => {
+        })
+      // vm.posts.push(vm.post)
       vm.togglePostForm()
       delete vm.post
+      $state.reload()
+    }
+
+    function updateClass(post) {
+      classService.updateClass(post.id, vm.editP)
+      .then(item => {
+        // delete vm.item
+        // onInit()
+        })
+      $state.reload()
+    }
+
+    function deleteClass(post) {
+      classService.deleteClass(post.id)
+      .then(classifieds => {
+        $state.reload
+      })
     }
   }
 }());
