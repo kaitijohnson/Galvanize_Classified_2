@@ -2,7 +2,7 @@
 (function() {
   'use strict'
 
-  angular.module('app').component('feed', {
+  angular.module('app').component('classifieds', {
     controller: controller,
     template: './js/classifieds/classifieds.html'
   })
@@ -13,15 +13,18 @@
     const vm = this
 
     vm.$onInit = onInit
-    vm.getIt = getIt
+    vm.getAds = getAds
     vm.togglePostForm = togglePostForm
-    vm.addPost = addPost
+    vm.getClass = getClass
+    vm.postClass = postClass
+    vm.updateClass = updateClass
+    vm.deleteClass = deleteClass
 
     function onInit() {
-      getIt()
+      getAds()
     }
 
-    function getIt() {
+    function getAds() {
       classService.getClass()
       .then(classifieds => {
         vm.classifieds = classifieds
